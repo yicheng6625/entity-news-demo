@@ -1,0 +1,146 @@
+/* 全站樣式：所有品牌共用同一份 CSS，品牌差異只透過 CSS 變數（由 [pub]/layout 注入）。
+   不使用 CSS 框架，是為了讓內容頁的 CSS 維持在數 KB，首屏渲染不被大型樣式表阻塞。 */
+
+:root {
+  --accent: #1f3a5f;
+  --accent-soft: #e8eef5;
+  --ink: #16191d;
+  --paper: #fbfaf8;
+  --muted: #5d636b;
+  --rule: #e2ded6;
+  --up: #17734a;
+  --down: #b42318;
+  --heading-font: Georgia, "Times New Roman", serif;
+  --body-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --measure: 68ch;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--body-font);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.55;
+  font-size: 16px;
+}
+a { color: inherit; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 3px; }
+a:hover { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--heading-font); line-height: 1.15; letter-spacing: -0.01em; }
+code { font-size: 0.9em; background: var(--accent-soft); padding: 0.1em 0.35em; border-radius: 4px; }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+.main { padding-top: 28px; padding-bottom: 64px; }
+.muted { color: var(--muted); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.brand { background: var(--paper); min-height: 100vh; display: flex; flex-direction: column; }
+.brand .main { flex: 1; width: 100%; }
+
+/* ---------- 刊頭 ---------- */
+.masthead { border-bottom: 1px solid var(--rule); background: var(--paper); }
+.masthead-inner { padding-top: 22px; padding-bottom: 10px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.logo { font-family: var(--heading-font); font-size: clamp(1.5rem, 3.5vw, 2.1rem); font-weight: 700; color: var(--accent); text-decoration: none; letter-spacing: -0.02em; }
+.tagline { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.nav { display: flex; gap: 22px; overflow-x: auto; padding-top: 6px; padding-bottom: 12px; border-top: 3px solid var(--accent); }
+.nav a { text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+
+/* ---------- 版面 ---------- */
+.home-grid, .entity-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px; }
+.rail { border-left: 1px solid var(--rule); padding-left: 28px; }
+@media (max-width: 860px) {
+  .home-grid, .entity-grid { grid-template-columns: 1fr; gap: 24px; }
+  .rail { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); }
+}
+.section { margin-top: 28px; }
+.section-title { font-family: var(--body-font); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); border-bottom: 1px solid var(--rule); padding-bottom: 8px; margin: 0 0 14px; }
+.kicker { margin: 0 0 6px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); }
+
+/* ---------- 文章清單 ---------- */
+.lead { padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
+.lead-title { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 12px; }
+.lead-title a { text-decoration: none; }
+.lead-dek { font-size: 1.15rem; color: var(--muted); margin: 0 0 10px; max-width: var(--measure); }
+.article-list { list-style: none; margin: 0; padding: 0; }
+.article-list li { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.article-list li:last-child { border-bottom: 0; }
+.article-link { text-decoration: none; }
+.article-title { font-family: var(--heading-font); font-size: 1.2rem; font-weight: 600; line-height: 1.25; }
+.article-list.compact .article-title { font-size: 1.02rem; }
+.article-dek { margin: 6px 0 4px; color: var(--muted); }
+.meta { margin: 4px 0 0; font-size: 0.82rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; }
+.badge { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.ranked { margin: 0; padding-left: 1.2em; }
+.ranked li { padding: 5px 0; }
+.ranked a { font-weight: 600; text-decoration: none; }
+
+/* ---------- 標籤 ---------- */
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chips a { display: inline-flex; flex-direction: column; text-decoration: none; padding: 6px 12px; border: 1px solid var(--rule); border-radius: 8px; background: #fff; font-size: 0.9rem; font-weight: 600; transition: border-color 0.15s; }
+.chips a:hover { border-color: var(--accent); }
+.chip-sub { font-size: 0.72rem; font-weight: 400; color: var(--muted); }
+
+/* ---------- 麵包屑 ---------- */
+.breadcrumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; padding: 0; font-size: 0.82rem; color: var(--muted); }
+.breadcrumbs li + li::before { content: "›"; margin-right: 6px; }
+
+/* ---------- 文章頁 ---------- */
+.article { max-width: 760px; }
+.article-head h1 { font-size: clamp(1.9rem, 4.2vw, 2.8rem); margin: 0 0 12px; }
+.article-body { font-size: 1.12rem; line-height: 1.7; max-width: var(--measure); margin-top: 28px; }
+.article-body p { margin: 0 0 1.1em; }
+.entity-link { color: var(--accent); text-decoration-thickness: 1px; font-weight: 500; }
+
+/* ---------- 實體頁 ---------- */
+.entity-head { margin-bottom: 8px; }
+.entity-head h1 { font-size: clamp(2rem, 4.5vw, 3rem); margin: 0 0 10px; }
+.entity-sub { font-size: 1.1rem; margin: 0 0 8px; }
+.entity-desc { max-width: var(--measure); color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 10px 32px; margin: 14px 0; }
+.facts dt { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.facts dd { margin: 2px 0 0; font-weight: 600; }
+
+/* ---------- 股價圖 ---------- */
+.price-card { margin: 18px 0 8px; padding: 18px; border: 1px solid var(--rule); border-radius: 12px; background: #fff; color: var(--accent); }
+.price-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; color: var(--ink); }
+.ticker { font-weight: 700; font-size: 0.85rem; letter-spacing: 0.06em; margin-right: 10px; color: var(--muted); }
+.price { font-size: 1.6rem; font-weight: 700; font-variant-numeric: tabular-nums; margin-right: 10px; }
+.delta { font-weight: 600; font-variant-numeric: tabular-nums; }
+.delta.up { color: var(--up); }
+.delta.down { color: var(--down); }
+.chart { width: 100%; height: 180px; display: block; margin-top: 12px; }
+.price-range { display: flex; justify-content: space-between; font-size: 0.75rem; margin-top: 6px; font-variant-numeric: tabular-nums; }
+.fresh { font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: #e7f4ec; color: var(--up); white-space: nowrap; }
+.fresh.stale { background: #fdecea; color: var(--down); }
+
+/* ---------- 搜尋 ---------- */
+.search h1 { margin-top: 0; }
+.search-form { display: flex; gap: 8px; margin: 12px 0 16px; max-width: 640px; }
+.search-form input { flex: 1; min-width: 0; font: inherit; padding: 10px 14px; border: 1px solid var(--rule); border-radius: 8px; background: #fff; }
+.search-form button { font: inherit; font-weight: 600; padding: 10px 18px; border: 0; border-radius: 8px; background: var(--accent); color: #fff; cursor: pointer; }
+mark { background: color-mix(in srgb, var(--accent) 16%, transparent); color: inherit; padding: 0 2px; border-radius: 3px; }
+
+/* ---------- 頁尾 ---------- */
+.footer { border-top: 1px solid var(--rule); font-size: 0.82rem; color: var(--muted); }
+.footer-inner { padding-top: 20px; padding-bottom: 28px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.footer-links { display: flex; gap: 16px; }
+
+/* ---------- 平台首頁 / 後台 ---------- */
+.platform { padding: 56px 0 80px; }
+.platform h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin: 0 0 12px; }
+.platform-lede { font-size: 1.15rem; color: var(--muted); max-width: var(--measure); }
+.pub-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 32px 0 40px; }
+.pub-card { display: flex; flex-direction: column; gap: 8px; padding: 22px; background: #fff; border: 1px solid var(--rule); border-top: 4px solid; border-radius: 10px; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; }
+.pub-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgb(0 0 0 / 0.06); }
+.pub-card-name { font-size: 1.45rem; font-weight: 700; }
+.endpoint-list { list-style: none; padding: 0; display: grid; gap: 8px; }
+.table-wrap { overflow-x: auto; margin-top: 20px; }
+.table { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: #fff; }
+.table th, .table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+.table th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.row-stale td { background: #fffafa; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

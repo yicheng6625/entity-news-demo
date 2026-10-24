@@ -1,0 +1,8 @@
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+# 資料庫由 seed 腳本確定性產生，不進版控以免二進位差異污染 diff
+data/*.db
+data/*.db-*
+.env*.local
