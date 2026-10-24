@@ -1,5 +1,7 @@
 # Entity News Platform (demo)
 
+**Live demo:** https://entity-news-demo.vercel.app — try [a company hub](https://entity-news-demo.vercel.app/northwind/company/aldervane-capital), [search](https://entity-news-demo.vercel.app/northwind/search?q=semiconductor), the [sitemap index](https://entity-news-demo.vercel.app/sitemap.xml) or the [API](https://entity-news-demo.vercel.app/api/companies?page=2&pageSize=10).
+
 A small, production-minded demo of a **multi-brand, entity-based business news platform** built with Next.js (App Router), TypeScript and SQL.
 
 Two fictional publications — **Northwind Markets Review** and **Harbor Business Review** — run on one codebase and share one entity graph of companies, executives, industries and countries. Every company, person and publication here is invented.
